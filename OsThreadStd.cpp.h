@@ -1,4 +1,4 @@
-#include "artd/OsThread.h"
+#include "artd/thread/OsThread.h"
 #include "artd/artd_assert.h"
 #include <thread>
 #include <chrono>
@@ -238,11 +238,10 @@ OsThread::OsThread(StringArg name)
 OsThread::~OsThread() {
 	I().~OsThreadImpl();
 }
-int32_t 
+std::thread::id
 OsThread::currentThreadId() {
-    ARTD_STATIC_ASSERT(sizeof(int32_t) == sizeof(std::thread::id));
-    std::thread::id id = std::this_thread::get_id();
-    return(*(int32_t*)&id);
+//    ARTD_STATIC_ASSERT(sizeof(int32_t) == sizeof());
+    return(std::this_thread::get_id());
 }
 void 
 OsThread::setName(StringArg name)

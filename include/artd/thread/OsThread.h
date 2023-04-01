@@ -46,11 +46,14 @@
 
 
 #define ARTD_THREAD_STD
+#include <thread>
 
 ARTD_BEGIN
 
 class Semaphore;
 class OsThreadImpl;
+
+#define INL ARTD_ALWAYS_INLINE
 
 
 class ARTD_API_JLIB_THREAD OsThread
@@ -62,20 +65,20 @@ private:
 	void _set_interruptable_waiter_(void *waiter);
 	void *_get_interruptable_data_();
 
-
 protected:
     friend class OsThreadImpl;
     friend class Semaphore;
 
 	OsThread(StringArg name = 0);
 	virtual ~OsThread();
-
+    
 	// override for cleanup actions
 	virtual void  onStop() {}
 
 public:
 	typedef void (*ThreadEntry)(void*);
-	
+    typedef std::thread::id id_t;
+    
 	// error codes for sleep and wait calls
 	static const int eWAIT_INTERRUPTED = -(0x0103);  // sleep, join 
 	static const int eWAIT_TIMEOUT     = -(0x0104); // join
@@ -96,7 +99,7 @@ public:
 	static const int THREAD_MAX_PRIORITY = Priority_System;
 
 	static bool       isMainThread();
-	static int32_t    currentThreadId();
+	static id_t       currentThreadId();
 
 	static OsThread*  currentOsThread();
 
@@ -104,9 +107,9 @@ public:
     static int        sleep(int32_t millis=-1);
 
 	
-	__forceinline OsThreadImpl &I() 
+	INL OsThreadImpl &I()
 		{ return(*(OsThreadImpl *)((void *)(&impl_))); }
-	__forceinline const OsThreadImpl &I() const
+	INL const OsThreadImpl &I() const
 		{ return(*(OsThreadImpl *)((void *)(&impl_))); }
 	
 
@@ -151,7 +154,8 @@ public:
     }
 
 protected:
-
+    friend class OsThreadImpl;
+    
 	// state flags
 	enum {
 		thSTARTED     = 0x001,
@@ -183,6 +187,7 @@ public:
     ImplBuf     impl_;
 };
 
+#undef INL
 
 ARTD_END
 

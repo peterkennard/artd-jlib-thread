@@ -86,7 +86,7 @@ public:
 
 	INL bool			isMainThread() { return(super::isMainThread()); }
 	INL static Thread *	currentThread() { return(static_cast<Thread*>(super::currentOsThread())); }
-	INL static int32_t	currentThreadId() { return(super::currentThreadId()); }
+	INL static id_t currentThreadId() { return(super::currentThreadId()); }
 	INL static int		sleep(int32_t millis = -1) { return(super::sleep(millis)); }
 	INL static void		yield() { super::yield(); }
 	INL int				suspend(void) { return(super::suspend()); }
