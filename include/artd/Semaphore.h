@@ -2,7 +2,7 @@
 #define __artd_Semaphore_h
 
 #include "artd/thread_base.h"
-#include "artd/OsThread.h"
+#include "artd/thread/OsThread.h"
 #include "artd/Mutex.h"
 
 #if defined(ARTD_THREAD_STD)
@@ -49,7 +49,7 @@ private:
 
 	union
 	{
-		char data[sizeof(OSMutex) + sizeof(std::condition_variable) + sizeof uint32_t];
+		char data[sizeof(OSMutex) + sizeof(std::condition_variable) + sizeof(uint32_t)];
 		int64_t align;
 	} impl_;
 

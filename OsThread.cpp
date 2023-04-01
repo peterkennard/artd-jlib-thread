@@ -1,6 +1,6 @@
 #define __artd_OsThread_cpp
 
-#include "artd/OsThread.h"
+#include "artd/thread/OsThread.h"
 
 ARTD_BEGIN
 	thread_local OsThread *_currentOsThread_ = nullptr;

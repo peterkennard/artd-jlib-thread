@@ -13,7 +13,7 @@ Rakish::CppProject.new(
 
 	cppDefine('BUILDING_artd_jlib_thread');
 		
-	addPublicIncludes('include/artd/*.h', 'include ');
+	addPublicIncludes('include/artd/*.h');
 	addPublicIncludes('include/artd/thread/*', :destdir=>'artd/thread');
 
     addSourceFiles(
