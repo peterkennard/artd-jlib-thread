@@ -26,7 +26,7 @@
 #define __artd_Thread_h
 
 #include "artd/ObjectBase.h"
-#include "artd/OsThread.h"
+#include "artd/thread/OsThread.h"
 #include "artd/Logger.h"
 
 #ifdef WINAPI
