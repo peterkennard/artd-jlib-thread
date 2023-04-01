@@ -1,4 +1,4 @@
-#include "artd/jlib-base"
+#include "artd/jlib_base.h"
 
 // TODO: we need to handle this for building either static or dll libraries !!
 

@@ -6,14 +6,22 @@ module Rakish
 Rakish::CppProject.new(
 	:name 			=> "artd-jlib-thread",
 	:package 		=> "artd",
-	:dependsUpon 	=> [ "../artd-lib-logger"]
+	:dependsUpon 	=> [ '../artd-lib-logger',
+	                     '../artd-jlib-base'
+	                   ]
 ) do
 
 	cppDefine('BUILDING_artd_jlib_thread');
 		
-	addPublicIncludes('include/artd/*.h');
+	addPublicIncludes('include/artd/*.h', 'include ');
+	addPublicIncludes('include/artd/thread/*', :destdir=>'artd/thread');
 
     addSourceFiles(
+        './Semaphore.cpp',
+        './StallMonitor.cpp',
+        './WaitableSignal.cpp',
+        './OsThread.cpp',
+        './Thread.cpp'
     );
 
     setupCppConfig :targetType =>'DLL' do |cfg|
