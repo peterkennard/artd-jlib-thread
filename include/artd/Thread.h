@@ -72,8 +72,6 @@ public:
        #pragma GCC diagnostic ignored "-Wkeyword-macro"
     #endif
 
-    ARTD_OBJECT_DECL
-
     Thread(ObjectPtr<Runnable> r, StringArg name = 0);
     Thread(StringArg name=0);
     ~Thread();
