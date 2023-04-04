@@ -73,6 +73,8 @@ public:
     #endif
 
     Thread(ObjectPtr<Runnable> r, StringArg name = 0);
+//    INL Thread(Runnable& r, StringArg name = 0) : Thread(Runnable::sharedFromThis(&r), name)
+//    {}
     Thread(StringArg name=0);
     ~Thread();
 
