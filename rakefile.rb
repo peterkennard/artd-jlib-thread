@@ -17,6 +17,7 @@ Rakish::CppProject.new(
 	addPublicIncludes('include/artd/thread/*', :destdir=>'artd/thread');
 
     addSourceFiles(
+        './CriticalSection.cpp',
         './Semaphore.cpp',
         './StallMonitor.cpp',
         './WaitableSignal.cpp',
