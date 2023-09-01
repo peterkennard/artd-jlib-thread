@@ -19,12 +19,17 @@ protected:
     ARTD_API_JLIB_THREAD void forceLinkage();
 public:
 
-#pragma warning( push )
-#pragma warning( disable : 26495)
-	INL Mutex(const Mutex& m) { } // disallowed
-	INL Mutex& operator=(const Mutex& m) { Mutex* mx = 0; return(*mx); } // disallowed
-#pragma warning( pop )
+#ifdef _MSC_VER
+    #pragma warning( push )
+    #pragma warning( disable : 26495)
+#endif
+	INL Mutex(const Mutex&) { } // disallowed
+	INL Mutex& operator=(const Mutex&) { Mutex* mx = 0; return(*mx); } // disallowed
 
+#ifdef _MSC_VER
+    #pragma warning( pop )
+#endif
+    
 	Mutex();
 	~Mutex();
 	void acquire();

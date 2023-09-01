@@ -23,9 +23,10 @@ ARTD_BEGIN
 class ARTD_API_JLIB_THREAD Semaphore
 {
 public:
-#pragma warning( push )
-#pragma warning( disable : 26495)
-
+#ifdef _MSC_VER
+    #pragma warning( push )
+    #pragma warning( disable : 26495)
+#endif
 	explicit Semaphore(int maxCount = 1, int initCount = 0);
 	~Semaphore();
 	void signal();
@@ -36,9 +37,11 @@ public:
 
 private:
 
-	INL Semaphore(const Semaphore &m) { } // disallowed
-#pragma warning( pop ) 
-	INL Semaphore &operator=(const Semaphore &m) { return(*this); } // disallowed
+	INL Semaphore(const Semaphore &/*m*/) { } // disallowed
+#ifdef _MSC_VER
+    #pragma warning( pop )
+#endif
+	INL Semaphore &operator=(const Semaphore &/*m*/) { return(*this); } // disallowed
 	
 	class Impl;
 	Impl& I();
@@ -79,7 +82,7 @@ private:
 		int64_t align;
 	} impl_;
 	class Impl;
-	ARTD_ALWAYS_INLINE Impl& I() const { return(*(Impl*)&impl_); }
+	INL Impl& I() const { return(*(Impl*)&impl_); }
 #endif
 
 };

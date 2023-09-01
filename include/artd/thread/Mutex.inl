@@ -1,7 +1,9 @@
 // only to be included by artd/Mutex.h
 
-#pragma warning( push )
-#pragma warning( disable : 26110)
+#ifdef _MSC_VER
+    #pragma warning( push )
+    #pragma warning( disable : 26110)
+#endif
 
 #define INL ARTD_ALWAYS_INLINE
 
@@ -32,7 +34,8 @@ INL bool ::artd::Mutex::tryAcquire() {
 	return res;
 }
 
-#pragma warning( pop )
-
+#ifdef _MSC_VER
+    #pragma warning( pop )
+#endif
 
 #undef INL
