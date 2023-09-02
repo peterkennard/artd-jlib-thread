@@ -63,7 +63,7 @@ public:
 		}
 		else {
 			while (!count_) {  // Main thread - no handle assigned !!! - can't inturrupt it Handle spurious wake-ups.
-				AD_LOG(info) << "spurrious wake up ???";
+				// AD_LOG(info) << "spurrious wake up ???";
 
 				std::cv_status  ret = cv_.wait_until(lock, end);
 				if (ret == std::cv_status::timeout) {
