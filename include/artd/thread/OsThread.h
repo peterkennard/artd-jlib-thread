@@ -180,11 +180,11 @@ protected:
 
     int32_t     flags_;
 public:
-    class ImplBuf {
+	class ARTD_API_JLIB_THREAD ImplBuf {
     protected:
         void *x[6];
     };
-    ImplBuf     impl_;
+	ImplBuf     impl_;
 };
 
 #undef INL

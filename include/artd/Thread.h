@@ -105,9 +105,12 @@ public:
     }
 
 private:
-    HackStdShared<Runnable> toRun_;
+    void* /*HackStdShared<Runnable> */ toRun_[2];
+    INL HackStdShared<Runnable> &hackToRun() {
+        return(*reinterpret_cast<HackStdShared<Runnable>*>(&toRun_));
+    }
     INL ObjectPtr<Runnable>& toRun() {
-        return(toRun_.objptr());
+        return(hackToRun().objptr());
     }
 };
 

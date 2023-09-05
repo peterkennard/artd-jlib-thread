@@ -32,17 +32,17 @@
 ARTD_BEGIN
 
 Thread::Thread(StringArg name)
-	: OsThread(name), toRun_(nullptr,nullptr)
+	: OsThread(name), toRun_{nullptr,nullptr}
 {
-	toRun_.setObj(this);
+	hackToRun().setObj(this);
 }
 Thread::Thread(ObjectPtr<Runnable> r, StringArg name)
 	: Thread(name)
 {
 	
 	if (sameOwner(r)) {
-		toRun_.setObj(r.get());
-		toRun_.setCb(nullptr);
+		hackToRun().setObj(r.get());
+		hackToRun().setCb(nullptr);
 	} else {
 		// AD_LOG(debug) << "new Thread " << getName() << " referencing toRun");
 		new(&toRun()) ObjectPtr<Runnable>(std::move(r));
@@ -53,7 +53,7 @@ Thread::~Thread()
 {
 	AD_LOG(info) << "Thread " << getName() << " being destroyed";
 	stop();
-	if (toRun_.cbPtr() != nullptr) {
+	if (hackToRun().cbPtr() != nullptr) {
 		toRun() = nullptr; // dereference
 	}
 }
