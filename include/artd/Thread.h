@@ -65,7 +65,7 @@ private:
 protected:
 	// override this ( virtual in OsThread) 
 	// for special cleanup operations ie: windows has a peculiar protocol.
-	void onStop();
+	void onStop() override;
 
 public:
     #ifdef __EMSCRIPTEN__
