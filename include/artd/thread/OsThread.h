@@ -182,7 +182,7 @@ protected:
 public:
 	class ARTD_API_JLIB_THREAD ImplBuf {
     protected:
-        void *x[6];
+        void *x[7];
     };
 	ImplBuf     impl_;
 };

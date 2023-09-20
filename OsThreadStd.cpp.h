@@ -24,7 +24,7 @@ class OsThreadImpl {
 #endif
 
 public:
-    
+    OsThread &owner_;
     std::thread thread_;
     artd::RcString name_;
 
@@ -38,7 +38,7 @@ public:
     };
 
     INL OsThread *myBase() {
-        return(ArtdToClass(OsThread, impl_, this));
+        return(&owner_); //ArtdToClass(OsThread, impl_, this));
     }
     INL int32_t getFlags(int32_t flags) {
         return(myBase()->getFlags(flags));
@@ -50,7 +50,7 @@ public:
         myBase()->clearFlags(flags);
     }
 
-	INL OsThreadImpl() : thread_() {
+	INL OsThreadImpl(OsThread *owner) : owner_(*owner), thread_() {
         
         entry_ = nullptr;   
         arg_ = nullptr;
@@ -232,7 +232,7 @@ OsThread::OsThread(StringArg name)
 {
 	ARTD_STATIC_ASSERT((sizeof(OsThreadImpl) <= sizeof(impl_)));
     flags_ = 0;
-	new(&I()) OsThreadImpl();
+	new(&I()) OsThreadImpl(this);
 	setName(name);
 }
 OsThread::~OsThread() {
