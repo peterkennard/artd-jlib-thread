@@ -110,7 +110,7 @@ private:
         return(*reinterpret_cast<HackStdShared<Runnable>*>(&toRun_));
     }
     INL ObjectPtr<Runnable>& toRun() {
-        return(hackToRun().objptr());
+        return(hackToRun().objPtr());
     }
 };
 
